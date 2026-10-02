@@ -1,0 +1,792 @@
+{
+ "document": "generated sample brief",
+ "slots": 628,
+ "pages": 3,
+ "sessions": [
+  "alice",
+  "bob",
+  "carol",
+  "dev",
+  "erin",
+  "frank"
+ ],
+ "leaker": "bob",
+ "colluders": [
+  "alice",
+  "bob"
+ ],
+ "baseline": {
+  "Same file, PDFium vs Poppler viewer": {
+   "psnr": 17.83,
+   "ssim": 0.9054
+  },
+  "Same file, scrolled 0.35 pt": {
+   "psnr": 17.96,
+   "ssim": 0.9207
+  }
+ },
+ "deltas": [
+  {
+   "delta_pt": 0.2,
+   "visual": {
+    "dpi": 150,
+    "pages": 3,
+    "psnr_db_min": 21.02,
+    "ssim_min": 0.96115,
+    "ssim_mean": 0.97765,
+    "pixels_changed_gt32": 105894,
+    "same_page_hashes": false
+   },
+   "attacks": [
+    {
+     "attack": "Forwarded PDF (as delivered)",
+     "group": "digital",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 187.1,
+     "threshold": 81.59,
+     "ratio": 2.29,
+     "max_innocent_score": 21.9,
+     "positions_read": 314,
+     "code_length": 314,
+     "bit_agreement_leaker": 1.0,
+     "seconds": 0.4
+    },
+    {
+     "attack": "Re-saved PDF (recompressed, linearised)",
+     "group": "digital",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 187.1,
+     "threshold": 81.59,
+     "ratio": 2.29,
+     "max_innocent_score": 21.9,
+     "positions_read": 314,
+     "code_length": 314,
+     "bit_agreement_leaker": 1.0,
+     "seconds": 0.4
+    },
+    {
+     "attack": "Screenshot 96 DPI (100% zoom)",
+     "group": "screen",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 82.7,
+     "threshold": 82.4,
+     "ratio": 1.0,
+     "max_innocent_score": 4.8,
+     "positions_read": 227,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.8106,
+     "seconds": 2.7
+    },
+    {
+     "attack": "Screenshot 150 DPI",
+     "group": "screen",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 119.7,
+     "threshold": 74.66,
+     "ratio": 1.6,
+     "max_innocent_score": 22.6,
+     "positions_read": 223,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9462,
+     "seconds": 11.5
+    },
+    {
+     "attack": "JPEG quality 90",
+     "group": "compression",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 119.2,
+     "threshold": 74.64,
+     "ratio": 1.6,
+     "max_innocent_score": 24.2,
+     "positions_read": 223,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9462,
+     "seconds": 12.1
+    },
+    {
+     "attack": "JPEG quality 60",
+     "group": "compression",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 120.6,
+     "threshold": 74.08,
+     "ratio": 1.63,
+     "max_innocent_score": 21.6,
+     "positions_read": 222,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9505,
+     "seconds": 3.6
+    },
+    {
+     "attack": "JPEG quality 40",
+     "group": "compression",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 118.3,
+     "threshold": 74.61,
+     "ratio": 1.59,
+     "max_innocent_score": 23.8,
+     "positions_read": 223,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9462,
+     "seconds": 2.7
+    },
+    {
+     "attack": "Crop (top 50% of page)",
+     "group": "geometric",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 84.4,
+     "threshold": 62.49,
+     "ratio": 1.35,
+     "max_innocent_score": 13.3,
+     "positions_read": 138,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9493,
+     "seconds": 12.6
+    },
+    {
+     "attack": "Rotate 3 deg + scale 85%",
+     "group": "geometric",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 117.3,
+     "threshold": 74.45,
+     "ratio": 1.58,
+     "max_innocent_score": 22.8,
+     "positions_read": 222,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9459,
+     "seconds": 4.2
+    },
+    {
+     "attack": "Print & scan (300 DPI, blur, skew, noise)",
+     "group": "physical",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 126.1,
+     "threshold": 76.25,
+     "ratio": 1.65,
+     "max_innocent_score": 18.6,
+     "positions_read": 227,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9648,
+     "seconds": 2.8
+    },
+    {
+     "attack": "Phone photo (perspective, lighting, JPEG)",
+     "group": "physical",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 127.3,
+     "threshold": 67.22,
+     "ratio": 1.89,
+     "max_innocent_score": 16.8,
+     "positions_read": 214,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9907,
+     "seconds": 11.9
+    },
+    {
+     "attack": "Collusion: pages interleaved from 2 copies",
+     "group": "collusion",
+     "verdict": "1 of 2 colluders caught",
+     "accused": [
+      "alice"
+     ],
+     "ok": true,
+     "score": 203.6,
+     "threshold": 82.35,
+     "ratio": 2.47,
+     "max_innocent_score": 33.2,
+     "positions_read": 314,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.7611,
+     "seconds": 0.3
+    },
+    {
+     "attack": "Collusion: words spliced from 2 copies",
+     "group": "collusion",
+     "verdict": "both colluders caught",
+     "accused": [
+      "alice",
+      "bob"
+     ],
+     "ok": true,
+     "score": 109.6,
+     "threshold": 74.45,
+     "ratio": 1.47,
+     "max_innocent_score": 34.4,
+     "positions_read": 275,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9345,
+     "seconds": 0.5
+    },
+    {
+     "attack": "Collusion: 2 screenshots averaged",
+     "group": "collusion",
+     "verdict": "inconclusive",
+     "accused": [],
+     "ok": false,
+     "score": 61.0,
+     "threshold": 73.94,
+     "ratio": 0.83,
+     "max_innocent_score": 26.9,
+     "positions_read": 218,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.8394,
+     "seconds": 3.1
+    }
+   ]
+  },
+  {
+   "delta_pt": 0.35,
+   "visual": {
+    "dpi": 150,
+    "pages": 3,
+    "psnr_db_min": 19.0,
+    "ssim_min": 0.93865,
+    "ssim_mean": 0.9651,
+    "pixels_changed_gt32": 165740,
+    "same_page_hashes": false
+   },
+   "attacks": [
+    {
+     "attack": "Forwarded PDF (as delivered)",
+     "group": "digital",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 176.9,
+     "threshold": 81.62,
+     "ratio": 2.17,
+     "max_innocent_score": -0.5,
+     "positions_read": 314,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9968,
+     "seconds": 0.3
+    },
+    {
+     "attack": "Re-saved PDF (recompressed, linearised)",
+     "group": "digital",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 176.9,
+     "threshold": 81.62,
+     "ratio": 2.17,
+     "max_innocent_score": -0.5,
+     "positions_read": 314,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9968,
+     "seconds": 0.4
+    },
+    {
+     "attack": "Screenshot 96 DPI (100% zoom)",
+     "group": "screen",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 108.6,
+     "threshold": 78.02,
+     "ratio": 1.39,
+     "max_innocent_score": 10.9,
+     "positions_read": 222,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9324,
+     "seconds": 3.0
+    },
+    {
+     "attack": "Screenshot 150 DPI",
+     "group": "screen",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 120.3,
+     "threshold": 68.26,
+     "ratio": 1.76,
+     "max_innocent_score": 12.4,
+     "positions_read": 232,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9871,
+     "seconds": 11.3
+    },
+    {
+     "attack": "JPEG quality 90",
+     "group": "compression",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 119.7,
+     "threshold": 68.06,
+     "ratio": 1.76,
+     "max_innocent_score": 11.7,
+     "positions_read": 231,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.987,
+     "seconds": 11.7
+    },
+    {
+     "attack": "JPEG quality 60",
+     "group": "compression",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 121.1,
+     "threshold": 68.0,
+     "ratio": 1.78,
+     "max_innocent_score": 11.1,
+     "positions_read": 231,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9913,
+     "seconds": 11.7
+    },
+    {
+     "attack": "JPEG quality 40",
+     "group": "compression",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 120.3,
+     "threshold": 68.37,
+     "ratio": 1.76,
+     "max_innocent_score": 12.4,
+     "positions_read": 233,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9871,
+     "seconds": 3.1
+    },
+    {
+     "attack": "Crop (top 50% of page)",
+     "group": "geometric",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 74.2,
+     "threshold": 50.53,
+     "ratio": 1.47,
+     "max_innocent_score": 13.3,
+     "positions_read": 139,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9928,
+     "seconds": 12.7
+    },
+    {
+     "attack": "Rotate 3 deg + scale 85%",
+     "group": "geometric",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 117.2,
+     "threshold": 67.7,
+     "ratio": 1.73,
+     "max_innocent_score": 12.0,
+     "positions_read": 230,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.987,
+     "seconds": 4.7
+    },
+    {
+     "attack": "Print & scan (300 DPI, blur, skew, noise)",
+     "group": "physical",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 123.3,
+     "threshold": 69.82,
+     "ratio": 1.77,
+     "max_innocent_score": 9.2,
+     "positions_read": 242,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9876,
+     "seconds": 11.4
+    },
+    {
+     "attack": "Phone photo (perspective, lighting, JPEG)",
+     "group": "physical",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 139.9,
+     "threshold": 72.5,
+     "ratio": 1.93,
+     "max_innocent_score": 10.7,
+     "positions_read": 259,
+     "code_length": 314,
+     "bit_agreement_leaker": 1.0,
+     "seconds": 11.6
+    },
+    {
+     "attack": "Collusion: pages interleaved from 2 copies",
+     "group": "collusion",
+     "verdict": "1 of 2 colluders caught",
+     "accused": [
+      "alice"
+     ],
+     "ok": true,
+     "score": 209.6,
+     "threshold": 83.09,
+     "ratio": 2.52,
+     "max_innocent_score": -1.3,
+     "positions_read": 311,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.7653,
+     "seconds": 0.4
+    },
+    {
+     "attack": "Collusion: words spliced from 2 copies",
+     "group": "collusion",
+     "verdict": "both colluders caught",
+     "accused": [
+      "alice",
+      "bob"
+     ],
+     "ok": true,
+     "score": 103.8,
+     "threshold": 74.97,
+     "ratio": 1.38,
+     "max_innocent_score": -0.5,
+     "positions_read": 278,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9388,
+     "seconds": 0.3
+    },
+    {
+     "attack": "Collusion: 2 screenshots averaged",
+     "group": "collusion",
+     "verdict": "1 of 2 colluders caught",
+     "accused": [
+      "alice"
+     ],
+     "ok": true,
+     "score": 79.9,
+     "threshold": 61.64,
+     "ratio": 1.3,
+     "max_innocent_score": 5.3,
+     "positions_read": 198,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9091,
+     "seconds": 2.6
+    }
+   ]
+  },
+  {
+   "delta_pt": 0.5,
+   "visual": {
+    "dpi": 150,
+    "pages": 3,
+    "psnr_db_min": 16.96,
+    "ssim_min": 0.90321,
+    "ssim_mean": 0.94592,
+    "pixels_changed_gt32": 239198,
+    "same_page_hashes": false
+   },
+   "attacks": [
+    {
+     "attack": "Forwarded PDF (as delivered)",
+     "group": "digital",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 220.9,
+     "threshold": 84.44,
+     "ratio": 2.62,
+     "max_innocent_score": 13.0,
+     "positions_read": 314,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9968,
+     "seconds": 0.4
+    },
+    {
+     "attack": "Re-saved PDF (recompressed, linearised)",
+     "group": "digital",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 220.9,
+     "threshold": 84.44,
+     "ratio": 2.62,
+     "max_innocent_score": 13.0,
+     "positions_read": 314,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9968,
+     "seconds": 0.4
+    },
+    {
+     "attack": "Screenshot 96 DPI (100% zoom)",
+     "group": "screen",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 147.5,
+     "threshold": 68.91,
+     "ratio": 2.14,
+     "max_innocent_score": 11.1,
+     "positions_read": 215,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9907,
+     "seconds": 3.4
+    },
+    {
+     "attack": "Screenshot 150 DPI",
+     "group": "screen",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 168.7,
+     "threshold": 72.21,
+     "ratio": 2.34,
+     "max_innocent_score": 9.8,
+     "positions_read": 234,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9957,
+     "seconds": 3.0
+    },
+    {
+     "attack": "JPEG quality 90",
+     "group": "compression",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 168.0,
+     "threshold": 71.83,
+     "ratio": 2.34,
+     "max_innocent_score": 12.2,
+     "positions_read": 231,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9957,
+     "seconds": 3.2
+    },
+    {
+     "attack": "JPEG quality 60",
+     "group": "compression",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 166.5,
+     "threshold": 72.05,
+     "ratio": 2.31,
+     "max_innocent_score": 10.7,
+     "positions_read": 232,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9914,
+     "seconds": 3.5
+    },
+    {
+     "attack": "JPEG quality 40",
+     "group": "compression",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 166.3,
+     "threshold": 71.39,
+     "ratio": 2.33,
+     "max_innocent_score": 14.2,
+     "positions_read": 230,
+     "code_length": 314,
+     "bit_agreement_leaker": 1.0,
+     "seconds": 3.0
+    },
+    {
+     "attack": "Crop (top 50% of page)",
+     "group": "geometric",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 91.1,
+     "threshold": 52.21,
+     "ratio": 1.75,
+     "max_innocent_score": 7.8,
+     "positions_read": 132,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9924,
+     "seconds": 12.9
+    },
+    {
+     "attack": "Rotate 3 deg + scale 85%",
+     "group": "geometric",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 174.6,
+     "threshold": 73.45,
+     "ratio": 2.38,
+     "max_innocent_score": 10.7,
+     "positions_read": 241,
+     "code_length": 314,
+     "bit_agreement_leaker": 1.0,
+     "seconds": 12.5
+    },
+    {
+     "attack": "Print & scan (300 DPI, blur, skew, noise)",
+     "group": "physical",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 175.9,
+     "threshold": 74.56,
+     "ratio": 2.36,
+     "max_innocent_score": 8.7,
+     "positions_read": 251,
+     "code_length": 314,
+     "bit_agreement_leaker": 1.0,
+     "seconds": 11.3
+    },
+    {
+     "attack": "Phone photo (perspective, lighting, JPEG)",
+     "group": "physical",
+     "verdict": "attributed",
+     "accused": [
+      "bob"
+     ],
+     "ok": true,
+     "score": 182.7,
+     "threshold": 75.75,
+     "ratio": 2.41,
+     "max_innocent_score": 7.8,
+     "positions_read": 257,
+     "code_length": 314,
+     "bit_agreement_leaker": 1.0,
+     "seconds": 11.6
+    },
+    {
+     "attack": "Collusion: pages interleaved from 2 copies",
+     "group": "collusion",
+     "verdict": "1 of 2 colluders caught",
+     "accused": [
+      "alice"
+     ],
+     "ok": true,
+     "score": 220.4,
+     "threshold": 83.92,
+     "ratio": 2.63,
+     "max_innocent_score": 13.9,
+     "positions_read": 310,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.671,
+     "seconds": 0.3
+    },
+    {
+     "attack": "Collusion: words spliced from 2 copies",
+     "group": "collusion",
+     "verdict": "both colluders caught",
+     "accused": [
+      "alice",
+      "bob"
+     ],
+     "ok": true,
+     "score": 99.0,
+     "threshold": 72.87,
+     "ratio": 1.36,
+     "max_innocent_score": 13.3,
+     "positions_read": 255,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9137,
+     "seconds": 0.3
+    },
+    {
+     "attack": "Collusion: 2 screenshots averaged",
+     "group": "collusion",
+     "verdict": "both colluders caught",
+     "accused": [
+      "alice",
+      "bob"
+     ],
+     "ok": true,
+     "score": 79.7,
+     "threshold": 60.29,
+     "ratio": 1.32,
+     "max_innocent_score": 7.0,
+     "positions_read": 181,
+     "code_length": 314,
+     "bit_agreement_leaker": 0.9337,
+     "seconds": 2.9
+    }
+   ]
+  }
+ ],
+ "text_copy": {
+  "chars": 4914,
+  "note": "Plain-text copy/paste removes word geometry; the word-shift channel cannot attribute it (text-layer channel is roadmap)."
+ }
+}

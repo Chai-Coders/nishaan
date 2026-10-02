@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nishaan console</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230F2740'/%3E%3Cpath d='M9 22V10l14 12V10' stroke='%23C9A13F' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6"/><path d="M9 22V10l14 12V10"/></svg>
+    <div><b>Nishaan</b><span>Decryption provenance &amp; leak attribution</span></div></div>
+  <div class="chainline" id="chainline"></div>
+</header>
+
+<div class="shell">
+  <nav class="rail" id="rail" aria-label="Sections">
+    <a href="#ledger" data-view="ledger">Ledger</a>
+    <p class="railnote">Demo sequence</p>
+    <a href="#send" data-view="send"><i>1</i>Send</a>
+    <a href="#open" data-view="open"><i>2</i>Open</a>
+    <a href="#compare" data-view="compare"><i>3</i>Compare</a>
+    <a href="#trace" data-view="trace"><i>4</i>Trace a leak</a>
+    <a href="#audit" data-view="audit"><i>5</i>Audit</a>
+    <p class="railnote">Reference</p>
+    <a href="#people" data-view="people">People &amp; keys</a>
+    <a href="#lab" data-view="lab">Attack lab</a>
+  </nav>
+
+  <main>
+    <section class="lanes" aria-label="Ledger nodes">
+      <div class="lanes-head"><h2>Ledger nodes</h2><p id="lanes-caption"></p></div>
+      <div class="lanes-body" id="lanes"></div>
+    </section>
+
+    <div id="setup" class="view" hidden>
+      <h1>Set up this workstation</h1>
+      <p class="lead">Creates an offline certificate authority, four ledger nodes with their own keys and databases, the genesis block, and six demo identities.</p>
+      <button class="primary" id="btn-init">Create workspace</button>
+      <p class="mut" id="setup-root"></p>
+    </div>
+
+    <!-- LEDGER -->
+    <div class="view" id="view-ledger" hidden>
+      <h1>Ledger</h1>
+      <p class="lead">Every decryption is a signed record committed by at least three of four independent nodes. Take nodes offline or make one malicious, then send or open a document to watch consensus route around it.</p>
+      <div class="grid2">
+        <div class="panel">
+          <h3>Nodes</h3>
+          <table class="tbl" id="node-ctl"></table>
+          <p class="hint" id="node-hint"></p>
+        </div>
+        <div class="panel">
+          <h3>Cryptography in use</h3>
+          <dl class="facts" id="facts"></dl>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Recent blocks</h3>
+        <div class="scroll"><table class="tbl click" id="blocks"></table></div>
+      </div>
+      <dialog id="block-dlg"><form method="dialog"><button class="ghost close" aria-label="Close">Close</button></form><pre id="block-json"></pre></dialog>
+    </div>
+
+    <!-- SEND -->
+    <div class="view" id="view-send" hidden>
+      <h1>Send a document</h1>
+      <p class="lead">The PDF is encrypted once (AES-256-GCM). Each recipient gets the key wrapped with ML-KEM-768, and a second key layer is split across the ledger nodes, so nobody can open it without leaving a record.</p>
+      <form class="panel form" id="send-form">
+        <label>Document
+          <span class="row"><input type="file" name="file" accept="application/pdf"><span class="mut">or leave empty to use the sample exercise brief</span></span></label>
+        <label>Title<input name="title" value="SAGAR KAVACH-26 logistics brief" required></label>
+        <div class="row3">
+          <label>Classification<select name="classification"><option>RESTRICTED</option><option>CONFIDENTIAL</option><option>SECRET</option></select></label>
+          <label>Openings per person<input name="max_decryptions" type="number" min="1" max="20" value="3"></label>
+          <label>Valid for (days)<input name="days" type="number" min="1" value="30"></label>
+        </div>
+        <fieldset><legend>Recipients</legend><div class="checks" id="recip-checks"></div></fieldset>
+        <button class="primary" type="submit">Encrypt and distribute</button>
+      </form>
+      <div id="send-out"></div>
+    </div>
+
+    <!-- OPEN -->
+    <div class="view" id="view-open" hidden>
+      <h1>Open as a recipient</h1>
+      <p class="lead">The record is signed and committed before any key is released. Only then do two ledger nodes hand over their key shares, and the copy is fingerprinted for this session.</p>
+      <form class="panel form" id="open-form">
+        <div class="row2">
+          <label>Document<select name="doc_id" id="open-doc"></select></label>
+          <label>Recipient<select name="who" id="open-who"></select></label>
+        </div>
+        <button class="primary" type="submit" id="open-btn">Open document</button>
+      </form>
+      <div id="open-out"></div>
+      <div class="panel"><h3>Copies handed out</h3><div class="copies" id="copies"></div></div>
+    </div>
+
+    <!-- COMPARE -->
+    <div class="view" id="view-compare" hidden>
+      <h1>Compare two copies</h1>
+      <p class="lead">Two recipients' copies of the same document. Blink between them: the words sit up to 0.35 pt apart, which is about a tenth of a millimetre.</p>
+      <form class="panel form" id="cmp-form">
+        <div class="row2"><label>Copy A<select id="cmp-a"></select></label><label>Copy B<select id="cmp-b"></select></label></div>
+        <button class="primary" type="submit">Compare</button>
+      </form>
+      <div id="cmp-out"></div>
+    </div>
+
+    <!-- TRACE -->
+    <div class="view" id="view-trace" hidden>
+      <h1>Trace a leak</h1>
+      <p class="lead">Give the forensic cell a leaked file and nothing else. The investigation is itself recorded on the ledger before the original can be decrypted for comparison.</p>
+      <div class="grid2">
+        <form class="panel form" id="trace-sim">
+          <h3>Simulate a leak</h3>
+          <label>Leaked copy<select name="copy_a" id="tr-a"></select></label>
+          <label>Leak route<select name="kind" id="tr-kind">
+            <option value="pdf">Forwarded PDF</option>
+            <option value="screenshot">Screenshot of page 1</option>
+            <option value="photo">Phone photo of the screen</option>
+            <option value="printscan">Printed and scanned</option>
+            <option value="crop">Cropped screenshot (top half)</option>
+            <option value="collusion">Two copies averaged together</option>
+          </select></label>
+          <label id="tr-b-wrap" hidden>Second copy<select name="copy_b" id="tr-b"></select></label>
+          <button class="primary" type="submit">Investigate</button>
+        </form>
+        <form class="panel form" id="trace-up">
+          <h3>Upload a leaked file</h3>
+          <label>PDF, PNG or JPEG<input type="file" name="file" accept=".pdf,.png,.jpg,.jpeg" required></label>
+          <p class="hint">A screenshot, photo or scan of any page with body text works. Pages with only a table carry too few words.</p>
+          <button class="primary" type="submit">Investigate</button>
+        </form>
+      </div>
+      <div id="trace-out"></div>
+    </div>
+
+    <!-- AUDIT -->
+    <div class="view" id="view-audit" hidden>
+      <h1>Audit the ledger</h1>
+      <p class="lead">Play a privileged insider. Each node re-verifies its chain from genesis, nodes are cross-checked, and signed checkpoints on removable media catch even an attacker who has stolen every node key.</p>
+      <div class="grid2">
+        <div class="panel">
+          <h3>Offline checkpoint</h3>
+          <p>Export the current head with its quorum signatures, as you would to a USB stick held by an independent witness.</p>
+          <button id="btn-cp">Export checkpoint</button>
+          <ul class="plain" id="cp-list"></ul>
+        </div>
+        <form class="panel form" id="tamper-form">
+          <h3>Tamper as an administrator</h3>
+          <label>Attack<select name="kind">
+            <option value="edit-record">Re-attribute the latest decryption record on one node</option>
+            <option value="delete-block">Delete the newest block on one node</option>
+            <option value="rewrite-history">Erase a record on every node using all stolen node keys</option>
+          </select></label>
+          <label>Node<select name="node" id="tamper-node"></select></label>
+          <button class="danger" type="submit">Tamper</button>
+        </form>
+      </div>
+      <div class="panel">
+        <div class="row-between"><h3>Audit result</h3><button class="primary" id="btn-audit">Run audit</button></div>
+        <div id="audit-out"><p class="mut">Run an audit to verify every node and every checkpoint.</p></div>
+      </div>
+    </div>
+
+    <!-- PEOPLE -->
+    <div class="view" id="view-people" hidden>
+      <h1>People and keys</h1>
+      <p class="lead">Certificates come from the offline CA and are anchored on the ledger. Revocation and key rotation are ledger transactions, so attribution checks the key that was valid at the moment of decryption.</p>
+      <div class="panel"><div class="scroll"><table class="tbl" id="people"></table></div></div>
+      <form class="panel form" id="enroll-form">
+        <h3>Enrol a person</h3>
+        <div class="row3">
+          <label>User id<input name="subject_id" required pattern="[a-z0-9-]+" placeholder="lt-meera"></label>
+          <label>Name and posting<input name="display_name" required placeholder="Lt. Meera Nair, INS Kochi"></label>
+          <label>Role<select name="role"><option>recipient</option><option>sender</option><option>forensic</option></select></label>
+        </div>
+        <button class="primary" type="submit">Issue certificate</button>
+      </form>
+    </div>
+
+    <!-- LAB -->
+    <div class="view" id="view-lab" hidden>
+      <h1>Attack lab</h1>
+      <p class="lead">Leak routes and collusion attacks run automatically against one recipient's copy, scored against the false-accusation threshold.</p>
+      <div class="panel">
+        <div class="row-between"><p class="mut" id="lab-status">No results yet.</p>
+          <span><button id="btn-lab">Run quick lab (about 1 minute)</button> <a class="btn ghost" href="/attacklab/report" target="_blank" id="lab-link" hidden>Open full report</a></span></div>
+        <pre class="log" id="lab-log" hidden></pre>
+        <div id="lab-out"></div>
+      </div>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

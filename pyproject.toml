@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nishaan"
+version = "0.1.0"
+description = "Post-quantum decryption provenance and leak attribution (SIH PS 26237 MVP)"
+requires-python = ">=3.10"
+readme = "README.md"
+dependencies = ["kyber-py>=1.0", "dilithium-py>=1.1", "cryptography>=42", "pikepdf>=8", "pdfplumber>=0.11",
+                "pypdfium2>=4", "opencv-python-headless>=4.8", "numpy>=1.24", "scipy>=1.10",
+                "scikit-image>=0.21", "Pillow>=10", "reportlab>=4", "flask>=3"]
+
+[project.optional-dependencies]
+liboqs = ["liboqs-python>=0.12"]
+
+[project.scripts]
+nishaan = "nishaan.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["nishaan*"]
+
+[tool.setuptools.package-data]
+"nishaan.web" = ["static/*", "static/fonts/*"]

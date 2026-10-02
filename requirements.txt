@@ -1,0 +1,19 @@
+# Post-quantum crypto. kyber-py + dilithium-py are pure-Python and install anywhere.
+# For speed and SLH-DSA, also build liboqs (https://github.com/open-quantum-safe/liboqs) and
+# `pip install liboqs-python` - see README "Crypto backends". It is picked up automatically.
+kyber-py>=1.0
+dilithium-py>=1.1
+cryptography>=42
+# PDF + imaging
+pikepdf>=8
+pdfplumber>=0.11
+pypdfium2>=4
+opencv-python-headless>=4.8
+numpy>=1.24
+scipy>=1.10
+scikit-image>=0.21
+Pillow>=10
+reportlab>=4
+# console
+flask>=3
+# optional, only for generating the Chromium sample: playwright
